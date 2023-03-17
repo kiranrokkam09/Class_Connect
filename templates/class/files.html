@@ -1,0 +1,4 @@
+{% extends 'class/base.html' %}
+                  {%for s in stream%}
+                  <p><a href="{{s.file.url}}">{{s.file}}<a></p>
+                  {%endfor%}
