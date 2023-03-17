@@ -4,7 +4,7 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
  [![git](https://badgen.net/badge/icon/git?icon=git&label)](https://git-scm.com) [![Visual Studio](https://badgen.net/badge/icon/visualstudio?icon=visualstudio&label)](https://visualstudio.microsoft.com) [![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://https://docker.com/)
  
-<h1> Zooming cls ( Google Classroom Clone )</h2>
+<h1> Class Connect</h2>
 <img src="readme/home.png">
 <hr>
 
