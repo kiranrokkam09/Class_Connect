@@ -63,7 +63,7 @@ class RoomStream(Time):
     room = models.ForeignKey(ClassRoom,on_delete=models.SET_NULL,null=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     post = models.TextField()
-    file = models.FileField(null=True, upload_to='student/')
+    file = models.FileField(null=True, upload_to='files/')
     is_featured = models.BooleanField(default=False)
     
 

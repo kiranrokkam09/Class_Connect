@@ -5,7 +5,7 @@
 
 <div class="navbar-nav ml-auto">
     <a class="nav-item nav-link active" href="{% url 'single' room.id %}"><i class="fas fa-bars"></i>  Stream<span class="sr-only">(current)</span></a>
-    <a class="nav-item nav-link" href="#"><i class="fas fa-file-signature"></i> Files</a>
+    <a class="nav-item nav-link" href="{% url 'files' room.id%}"><i class="fas fa-file-signature"></i> Files</a>
     <a class="nav-item nav-link" href="{% url 'people' room.id %}"> <i class="fas fa-users"></i> People</a>
     <a class="nav-item nav-link" href=""  data-toggle="modal" data-target="#exampleModal">Leave Class <i class="fas fa-sign-out-alt"></i> </a>
 
@@ -73,14 +73,16 @@
               <div class="col-3">
                 <div class="filebox ">
                   <h5>Upcomming Files</h5>
-                  <p> No File yet</p>
+                  {% comment %} {%for s in stream%}
+                  <p><a href="{{s.file.url}}">{{s.file}}<a></p>
+                  {%endfor%} {% endcomment %}
                   <a href="" class="text-right"> View All </a>
                 </div>
               </div>
               <div class="col-9">
                 <div class="sendbox">
                   <img src="{{ user.students.photo.url }}" alt="">
-                  <form action="{% url 'stream_create' room.id %}" method="POST" style="display: flex;">
+                  <form action="{% url 'stream_create' room.id %}" method="POST" enctype="multipart/form-data" style="display: flex;">
                     {% csrf_token %}
                     <input type="text" name ="post" class="form-control" placeholder="Add Stream" required>
                     <input type="file" name="doc" class="form-control" id="doc" required>

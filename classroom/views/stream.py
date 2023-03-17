@@ -8,12 +8,7 @@ from profiles.models import Teacher, Student
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from classroom.functions import handle_uploaded_file  
 
-def handle_uploaded_file(f):
-    with open('media/others/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
 # Create Stream
 class CreateStream(View):
     method_decorator(login_required(login_url='login'))
@@ -28,7 +23,7 @@ class CreateStream(View):
         file = request.FILES.get('doc')
         stream = RoomStream(user=user,room=room,post=post,file=file)
         stream.save()
-        messages.success(request,'The Stream has Been Added'+str(file))
+        messages.success(request,'The Stream has Been Added')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
