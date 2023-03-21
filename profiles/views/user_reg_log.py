@@ -37,6 +37,7 @@ class TeacherRegister(View):
             return redirect('signup')
         else:
             auth_info ={
+                'username':name,
                 'email':username,
                 'password':make_password(password1)
             }
@@ -77,6 +78,7 @@ class StudentRegister(View):
 
         else:
             auth_info ={
+                'username':name,
                 'email':username,
                 'password':make_password(password1)
             }

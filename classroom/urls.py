@@ -19,6 +19,9 @@ urlpatterns =[
 
     path('<str:id>/create/comment', CreateComment.as_view(),name='comment_create'),
     path('<str:id>/create/files/',myviews.files,name='files'),
+    path('<str:id>/create/attendance/',myviews.attendance,name='attendance'),
+    path('view/<str:id>/<str:username>/create/attendance/student',myviews.getattendance,name='getattendance'),
+    path('<str:id>/create/save/',myviews.save,name='save'),
     #send email route
     path('send/code/via/mail',SendMail.as_view(),name='send'),
 ]

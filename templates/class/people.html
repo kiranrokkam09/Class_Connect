@@ -2,10 +2,10 @@
 {% block class_link %}
 <div class="navbar-nav ml-auto">
     <a class="nav-item nav-link active" href="{% url 'single' room.id %}"><i class="fas fa-bars"></i>  Stream<span class="sr-only">(current)</span></a>
-    {% comment %} <a class="nav-item nav-link" href"{%url 'files'%}"><i class="fas fa-file-signature"></i> Files</a> {% endcomment %}
+    {% comment %} <a class="nav-item nav-link" href="{% url 'files' room.id%}"><i class="fas fa-file-signature"></i> Files</a> {% endcomment %}
+    <a class="nav-item nav-link" href="{% url 'attendance' room.id%}"><i class="far fa-calendar-alt"></i> Attendance</a>
     <a class="nav-item nav-link" href="{% url 'people' room.id %}"> <i class="fas fa-users"></i> People</a>
     <a class="nav-item nav-link" href=""  data-toggle="modal" data-target="#exampleModal">Leave Class <i class="fas fa-sign-out-alt"></i> </a>
-
   </div>
 {% endblock %}
 {% block css %}

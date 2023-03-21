@@ -1,4 +1,34 @@
 {% extends 'class/base.html' %}
-                  {%for s in stream%}
-                  <p><a href="{{s.file.url}}">{{s.file}}<a></p>
-                  {%endfor%}
+{% block class_link %}
+<div class="navbar-nav ml-auto">
+    <a class="nav-item nav-link active" href="{% url 'single' room.id %}"><i class="fas fa-bars"></i>  Stream<span class="sr-only">(current)</span></a>
+    <a class="nav-item nav-link" href="{% url 'files' room.id%}"><i class="fas fa-file-signature"></i> Files</a>
+    <a class="nav-item nav-link" href="{% url 'attendance' room.id%}"><i class="far fa-calendar-alt"></i> Attendance</a>
+    <a class="nav-item nav-link" href="{% url 'people' room.id %}"> <i class="fas fa-users"></i> People</a>
+    <a class="nav-item nav-link" href=""  data-toggle="modal" data-target="#exampleModal">Leave Class <i class="fas fa-sign-out-alt"></i> </a>
+  </div>
+{% endblock %}
+{% block css %}
+.box{
+    box-shadow: 1px 1px 5px 1px #a9a7a7;
+    border-radius:10px;
+    text-align:center;
+}
+.box img{
+    width:100%;
+    border-radius:5%;
+
+}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row mt-3">
+        {% comment %} <h1>{{room.file}}</h1> {% endcomment %}
+        <ol>
+        {% for s in s%}
+        <li>{{s}}</li>
+        {% endfor %}
+        </ol>
+    </div>
+{% endblock %}

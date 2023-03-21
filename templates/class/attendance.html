@@ -1,0 +1,72 @@
+{% extends 'class/base.html' %}
+{% block class_link %}
+<div class="navbar-nav ml-auto">
+    <a class="nav-item nav-link active" href="{% url 'single' room.id %}"><i class="fas fa-bars"></i>  Stream<span class="sr-only">(current)</span></a>
+    <a class="nav-item nav-link" href="{% url 'files' room.id%}"><i class="fas fa-file-signature"></i> Files</a>
+    {%if user.is_authenticated%}
+    {%if user.is_teacher%}
+    <a class="nav-item nav-link" href="{% url 'attendance' room.id%}"><i class="far fa-calendar-alt"></i> Attendance</a>
+    {%else%}
+    <a class="nav-item nav-link" href="{% url 'attendance' room.id%}"><i class="far fa-calendar-alt"></i> Attendance</a>
+    {%endif%}
+    {%endif%}
+    <a class="nav-item nav-link" href="{% url 'people' room.id %}"> <i class="fas fa-users"></i> People</a>
+    <a class="nav-item nav-link" href=""  data-toggle="modal" data-target="#exampleModal">Leave Class <i class="fas fa-sign-out-alt"></i> </a>
+  </div>
+{% endblock %}
+{% block css %}
+.box{
+    box-shadow: 1px 1px 5px 1px #a9a7a7;
+    border-radius:10px;
+    text-align:center;
+}
+.box img{
+    width:100%;
+    border-radius:5%;
+
+}
+{% endblock %}
+{% block content %}
+<form action="{% url 'save' room.id %}" method="post">
+  {% csrf_token %}
+<div class="card mb-3">
+<div class="card-header">
+<i class="fas fa-table"></i>
+{% comment %} <b>{{ dept1.name }}</b></div> {% endcomment %}
+<div class="card-body">
+<div class="table-responsive">
+  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+          <th>Student name</th>
+          <th><input type="date" id="date" name="date"></th>
+      </tr>
+    </thead>
+      <tbody>
+      {% for s in s %}
+          <tr>
+          <td>{{s.name}}</td>
+          <td>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+                      <label class="btn btn-outline-success active">
+                          <input type="radio" name="{{ s.name }}" id="option1" autocomplete="off" value="present" checked> Present
+                      </label>
+
+                      <label class="btn btn-outline-danger">
+                          <input type="radio" name="{{ s.name }}" id="option2" autocomplete="off" value="absent"> Absent
+                      </label>
+              </div>
+          </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+  </table>
+</div>
+</div>
+</div>
+
+
+<input class="btn btn-success" type="submit" value="Submit">
+</form>
+{% endblock %}

@@ -23,6 +23,7 @@ class ClassRoom(Time):
     details = models.TextField()
     teacher = models.ForeignKey(Teacher,on_delete=models.SET_NULL, null=True,related_name='room')
     student = models.ManyToManyField(Student,through='MemberShip', related_name='s_room')
+    stat=models.TextField(null=True)
 
 
     def __str__(self):
@@ -81,4 +82,13 @@ class Comment(Time):
 
     def __str__(self):
         return f"{self.user} commented on {self.stream}"
-
+class Attendance(Time):
+    id=models.UUIDField(primary_key=True, default=uuid.uuid4)
+    classname = models.TextField(null=True)
+    Student = models.TextField(null=True)
+    date=models.DateField(null=True,default='2023-01-01')
+    Status=models.TextField()
+    
+    def __str__(self):
+        return f"{self.classname}|{self.date}"
+    
