@@ -26,10 +26,18 @@ def save(request,id):
     for i, s in enumerate(room.student.all()):
         status=request.POST.get(s.name,False)
         date=request.POST.get('date')
-        sat=Attendance(classname=room.name,Student=s.name,date=date,Status=status)
-        sat.save()
-    return render(request,"class/attendance.html",{'room':room,
+        k=Attendance.objects.filter(date=date,Student=s.name)
+        if k:
+            k.update(Status=status)
+        else:
+            sat=Attendance(classname=room.name,Student=s.name,date=date,Status=status)
+            sat.save()
+    # messages.success(request,'Attendance Added')
+    return render(request,"class/added.html",{'room':room,
                                                    's':room.student.all().order_by('name')})
+def added(request,id):
+    room = get_object_or_404(ClassRoom, id=id)
+    return render(request,'added.html',{'room':room})
 def getattendance(request,id,username):
     room = get_object_or_404(ClassRoom, id=id)
     students = room.student.all().order_by('name')

@@ -2,12 +2,12 @@
 {% block class_link %}
 <div class="navbar-nav ml-auto">
     <a class="nav-item nav-link active" href="{% url 'single' room.id %}"><i class="fas fa-bars"></i>  Stream<span class="sr-only">(current)</span></a>
-    <a class="nav-item nav-link" href="{% url 'files' room.id%}"><i class="fas fa-file-signature"></i> Files</a>
+    {% comment %} <a class="nav-item nav-link" href="{% url 'files' room.id%}"><i class="fas fa-file-signature"></i> Files</a> {% endcomment %}
     {%if user.is_authenticated%}
     {%if user.is_teacher%}
     <a class="nav-item nav-link" href="{% url 'attendance' room.id%}"><i class="far fa-calendar-alt"></i> Attendance</a>
     {%else%}
-    <a class="nav-item nav-link" href="{% url 'attendance' room.id%}"><i class="far fa-calendar-alt"></i> Attendance</a>
+    <a class="nav-item nav-link" href="{% url 'getattendance' room.id user.username%}"><i class="far fa-calendar-alt"></i> Attendance</a>
     {%endif%}
     {%endif%}
     <a class="nav-item nav-link" href="{% url 'people' room.id %}"> <i class="fas fa-users"></i> People</a>
