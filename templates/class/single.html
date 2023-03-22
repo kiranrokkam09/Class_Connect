@@ -80,9 +80,24 @@
               <div class="col-3">
                 <div class="filebox ">
                   <h5>Upcomming Files</h5>
+                  {% if user.is_teacher%}
                   {%for s in stream%}
-                  <p><a href="{{s.file.url}}">{{s.user}} file<a></p>
+                  {%if s.file%}
+                  <p><a href="{{s.file.url}}">{{s.user.username}} file<a></p>
+                  {%endif%}
                   {%endfor%}
+                  {%else%}
+                  {%for s in stream%}
+                  {%if s.file%}
+                  {%ifequal s.user user%}
+                  <p><a href="{{s.file.url}}">{{s.user.username}} file<a></p>
+                  {%endifequal%}
+                  {% if s.user.is_teacher%}
+                  <p><a href="{{s.file.url}}">{{s.user.username}} file<a></p>
+                  {%endif%}
+                  {%endif%}
+                  {%endfor%}
+                  {%endif%}
                   <a href="" class="text-right"> View All </a>
                 </div>
               </div>
@@ -92,7 +107,7 @@
                   <form action="{% url 'stream_create' room.id %}" method="POST" enctype="multipart/form-data" style="display: flex;">
                     {% csrf_token %}
                     <input type="text" name ="post" class="form-control" placeholder="Add Stream" required>
-                    <input type="file" name="doc" class="form-control" id="doc" required>
+                    <input type="file" name="doc" class="form-control" id="doc">
                     <button type="submit"> <i class="fas fa-rocket "></i></button>
                   </form>
                 </div>
@@ -114,11 +129,11 @@
                     <p><a href="{{s.file.url}}">{{s.file}}<a></p>
                     {%endif%}
 
-                      {% comment %} <hr> {% endcomment %}
-                      {% comment %} <a href="" data-toggle="collapse" data-target="#collapseExample{{ s.id }}" aria-expanded="false" aria-controls="collapseExample{{ s.id }}"> Reply </a> {% endcomment %}
+                      {% comment %} <hr>
+                      <a href="" data-toggle="collapse" data-target="#collapseExample{{ s.id }}" aria-expanded="false" aria-controls="collapseExample{{ s.id }}"> Reply </a> {% endcomment %}
                   </div>
-                    {% comment %} <!-- Reply box -->
-                  <div class="collapse"  id="collapseExample{{ s.id }}" style="margin-left:50px ;">
+                  <!-- Reply box -->
+                  {% comment %} <div class="collapse"  id="collapseExample{{ s.id }}" style="margin-left:50px ;">
                     <div class="card card-body">
                       <form action="{% url 'comment_create' s.id %}" method="POST" style="display: flex;">
                         {% csrf_token %}
@@ -132,6 +147,7 @@
             {%else%}
                 <div style="margin-top: 50px;">
                   {% for s in stream %}
+                  {%if s.user.is_teacher%}
                   <div class="stream">
                     <div style="display: inline-flex;">
                       <img src="{{ s.user.students.photo.url }}" alt="">
@@ -158,6 +174,35 @@
                       </form>
                     </div>
                   </div> {% endcomment %}
+                  {%endif%}
+                  {%ifequal s.user user%}
+                  <div class="stream">
+                    <div style="display: inline-flex;">
+                      <img src="{{ s.user.students.photo.url }}" alt="">
+                      <h5 style="margin-left:10px;"><strong>{{ s.user.students.name }}</strong></h5> 
+                      
+                      <p style="color:gray">{{ s.created_at|timesince }} ago </p>
+                      
+                    </div>
+                    <p>{{s.post}}</p>
+                    {%if s.file%}
+                    <p><a href="{{s.file.url}}">{{s.file}}<a></p>
+                    {%endif%}
+
+                      {% comment %} <hr> {% endcomment %}
+                      {% comment %} <a href="" data-toggle="collapse" data-target="#collapseExample{{ s.id }}" aria-expanded="false" aria-controls="collapseExample{{ s.id }}"> Reply </a> {% endcomment %}
+                  </div>
+                    {% comment %} <!-- Reply box -->
+                  <div class="collapse"  id="collapseExample{{ s.id }}" style="margin-left:50px ;">
+                    <div class="card card-body">
+                      <form action="{% url 'comment_create' s.id %}" method="POST" style="display: flex;">
+                        {% csrf_token %}
+                        <input type="text" name="comment" class="form-control" placeholder="Add Comment" style="margin-right:3px;">
+                        <button class="btn btn-primary btn-sm" type="submit"> Add Comment </button>
+                      </form>
+                    </div>
+                  </div> {% endcomment %}
+                  {%endifequal%}
                   {% endfor %}
                 </div>
             {%endif%}

@@ -41,7 +41,7 @@ def added(request,id):
 def getattendance(request,id,username):
     room = get_object_or_404(ClassRoom, id=id)
     students = room.student.all().order_by('name')
-    filter=Attendance.objects.filter(classname=room.name,Student=username)
+    filter=Attendance.objects.filter(classname=room.name,Student=username).order_by('date')
     return render(request,"class/studentatt.html",{'room':room,
                                                     's' :students,
                                                     'names':filter})
