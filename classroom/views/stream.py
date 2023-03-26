@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from classroom.models import ClassRoom,RoomStream, Comment,ClassFiles
-from profiles.models import Teacher, Student
+from profiles.models import Teacher, Student,User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -23,12 +23,12 @@ class CreateStream(View):
         file = request.FILES.get('doc')
         stream = RoomStream(user=user,room=room,post=post,file=file)
         files=ClassFiles(room=room,class_files=file)
-        send_mail(
-            'Assignment Posted',#subject
-            'Assignment Submitted',#matter
-            'kiran.rokkam09@gmail.com',#from email
-            ['kiran.rokkam456@gmail.com'],#to email
-        )
+        lst=[]
+        students = room.student.all()
+        for i in students:
+            lst.append(i)
+        if(user.is_teacher):
+            send_mail('Assignment Posted',post,'kiran.rokkam09@gmail.com',lst,)
         stream.save()
         files.save()
         messages.success(request,'The Stream has Been Added')

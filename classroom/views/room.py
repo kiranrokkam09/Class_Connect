@@ -27,9 +27,9 @@ class CreateClassRoom(View):
     def post(self,request):
         name = request.POST.get('name')
         unit = request.POST.get('unit')
-        detail = request.POST.get('detail')
+        section = request.POST.get('detail')
         user = request.user.teachers
-        room = ClassRoom(teacher =user,unit=unit, name=name, details = detail )
+        room = ClassRoom(teacher =user,unit=unit, name=name, section = section )
         room.save()
         messages.success(request,' Classroom Has Been Created !!')
         return redirect('teacher')

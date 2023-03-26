@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 from django.db.models.fields import TextField
 from profiles.models  import Teacher, Student, User
-from .utils import unique_code_generate
+# from .utils import unique_code_generate
 from django.db.models.signals import pre_save
 
 class Time(models.Model):
@@ -18,22 +18,21 @@ class ClassRoom(Time):
     id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
     name = models.CharField(max_length=100,blank=False, null=True)
     cover = models.ImageField(upload_to='others/cover/', default='others/class.jpg',null=True)
-    unit = models.CharField(max_length=100, null=True)
-    code = models.CharField(max_length=8,blank=True, null=True) # random 
-    details = models.TextField()
+    classname = models.CharField(max_length=100, null=True)
+    section = models.IntegerField(null=True)
     teacher = models.ForeignKey(Teacher,on_delete=models.SET_NULL, null=True,related_name='room')
     student = models.ManyToManyField(Student,through='MemberShip', related_name='s_room')
-    stat=models.TextField(null=True)
+    # stat=models.TextField(null=True)
 
 
     def __str__(self):
         return self.name
 
-def make_code(sender,instance,*args,**kwargs):
-    if not instance.code:
-        instance.code = unique_code_generate(instance)
+# def make_code(sender,instance,*args,**kwargs):
+#     if not instance.code:
+#         instance.code = unique_code_generate(instance)
 
-pre_save.connect(make_code,sender=ClassRoom)
+# pre_save.connect(make_code,sender=ClassRoom)
 
 # Group member
 class MemberShip(models.Model):
