@@ -18,7 +18,7 @@ class ClassRoom(Time):
     id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
     name = models.CharField(max_length=100,blank=False, null=True)
     cover = models.ImageField(upload_to='others/cover/', default='others/class.jpg',null=True)
-    classname = models.CharField(max_length=100, null=True)
+    branch = models.CharField(max_length=100, null=True)
     section = models.IntegerField(null=True)
     teacher = models.ForeignKey(Teacher,on_delete=models.SET_NULL, null=True,related_name='room')
     student = models.ManyToManyField(Student,through='MemberShip', related_name='s_room')
@@ -87,7 +87,6 @@ class Attendance(Time):
     Student = models.TextField(null=True)
     date=models.DateField(null=True,default='2023-01-01')
     Status=models.TextField()
-    
     def __str__(self):
         return f"{self.classname}|{self.date}"
     

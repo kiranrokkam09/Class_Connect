@@ -35,21 +35,6 @@ class CreateStream(View):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-'''
-# SIngle Stream 
-class SingleStream(View):
-    method_decorator(login_required(login_url='login'))
-    def dispatch(self,request,*args,**kwargs):
-        return super().dispatch(request,*args,**kwargs)
-
-    def get(self,request,id):
-        stream = get_object_or_404(RoomStream, id=id)
-        context ={
-            'comment':stream.comment_set.all().order_by('-created_at')
-        }
-        return render(request,'class/single_stream.html', context)
-'''
-
 # Stream comment Create
 
 class CreateComment(View):   
