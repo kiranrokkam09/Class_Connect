@@ -45,9 +45,9 @@
                         <a href="{% url 'logout' %}"  class="nav-link"> <i class="fas fa-power-off"></i> Logout</a>
                     </li>
                 {% else %}
-                    <li class="nav-item">
+                    {% comment %} <li class="nav-item">
                         <a class="nav-link btn btn-outline-success" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> Sign Up </a>
-                    </li>&nbsp;
+                    </li>&nbsp; {% endcomment %}
                     <li class="nav-item">
                         <a class="nav-link btn btn-primary" href="{% url 'login' %}"> <i class="fas fa-sign-in-alt"></i> Login</a>
                     </li>

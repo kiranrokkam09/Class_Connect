@@ -8,6 +8,7 @@ from profiles.models import Teacher, Student
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
 
 # Create Stream
 class CreateStream(View):
@@ -22,6 +23,12 @@ class CreateStream(View):
         file = request.FILES.get('doc')
         stream = RoomStream(user=user,room=room,post=post,file=file)
         files=ClassFiles(room=room,class_files=file)
+        send_mail(
+            'Assignment Posted',#subject
+            'Assignment Submitted',#matter
+            'kiran.rokkam09@gmail.com',#from email
+            ['kiran.rokkam456@gmail.com'],#to email
+        )
         stream.save()
         files.save()
         messages.success(request,'The Stream has Been Added')
