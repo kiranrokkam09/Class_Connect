@@ -28,7 +28,7 @@ class CreateStream(View):
         for i in students:
             lst.append(i)
         if(user.is_teacher):
-            send_mail('Assignment Posted',post,'kiran.rokkam09@gmail.com',lst,)
+            send_mail('Assignment Posted',post,'connectclass9@gmail.com',lst,)
         stream.save()
         files.save()
         messages.success(request,'The Stream has Been Added')

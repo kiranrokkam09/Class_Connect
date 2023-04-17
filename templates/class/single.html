@@ -109,7 +109,7 @@
                   <img src="{{ user.students.photo.url }}" alt="">
                   <form action="{% url 'stream_create' room.id %}" method="POST" enctype="multipart/form-data" style="display: flex;">
                     {% csrf_token %}
-                    <input type="text" name ="post" class="form-control" placeholder="Add Stream" required>
+                    <input type="text" name ="post" class="form-control" placeholder="Add Stream">
                     <input type="file" name="doc" class="form-control" id="doc">
                     <button type="submit"> <i class="fas fa-rocket "></i></button>
                   </form>

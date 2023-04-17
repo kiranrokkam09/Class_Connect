@@ -33,12 +33,12 @@
         <div class="col-2 box m-2 p-3">
             <img src="{{ s.photo.url  }}" alt="">
             <h4 class="text">{{ s.name }}</h4>
-            {% ifequal s.placed "Placed" %}
+            {% ifnotequal s.placed 'no' %}
             <h4 class="text">Placed</h4>
             <h4 class="text">{{s.company}}</h4>
             {%else%}
             <h4 class="text">Not Placed</h4>
-            {% endifequal %}
+            {% endifnotequal %}
         </div>
         {% endfor %}
     </div>
