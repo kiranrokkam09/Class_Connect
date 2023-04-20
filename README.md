@@ -18,9 +18,7 @@
 Clone the repository using the following command
 
 ```bash
-git clone github.com/yeazin/Zooming-cls.git
-# After cloning, move into the directory having the project files using the change directory command
-cd Zooming-cls
+git clone https://github.com/kiranrokkam09/Class_Connect.git
 ```
 Create a virtual environment where all the required python packages will be installed
 
